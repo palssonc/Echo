@@ -1,6 +1,6 @@
 # Echo — Podcast Shadowing
 
-Echo is a static, installable web app for discovering podcast feeds and saving moments for language shadowing. Subscriptions, listening positions, clips, notes, favorites, and microphone recordings are stored in the browser's IndexedDB on this device.
+Echo is a static, installable web app for discovering podcast feeds and saving moments for language shadowing. Subscriptions, listening positions, clips, notes, favorites, microphone recordings, and downloaded episodes are stored in the browser's IndexedDB on this device. Downloaded episodes can play offline after the download completes.
 
 ## Run locally
 
@@ -12,8 +12,8 @@ The repository-level workflow at `../.github/workflows/deploy-podcast-pages.yml`
 
 ## Browser limits
 
-Podcast audio is hosted by many independent publishers. The player attempts CORS-enabled playback so it can keep a short rolling audio buffer for one-tap clips. If a host blocks browser audio access, Echo falls back to normal playback and reports that clipping is unavailable for that episode. Feed import tries the feed directly, then a public CORS relay; that relay is an external service. Installability, background audio, and microphone behavior vary by browser and device.
+Podcast audio is hosted by many independent publishers. The player attempts CORS-enabled playback so it can keep a short rolling audio buffer for one-tap clips. If a host blocks browser audio access, Echo falls back to normal playback and reports that clipping is unavailable for that episode. Downloads also require the podcast host to allow browser CORS requests; the app reports when a host blocks a download. Feed import tries the feed directly, then a public CORS relay; that relay is an external service. Installability, background audio, and microphone behavior vary by browser and device.
 
 ## Local data
 
-Echo does not create an account or send clip and recording data to a server. Clearing this browser's site data removes the local library. Saved audio uses WAV for broad browser support and can use substantial device storage.
+Echo does not create an account or send clip, recording, or downloaded episode data to a server. Clearing this browser's site data removes the local library and offline downloads. Saved episode audio can use substantial device storage.
