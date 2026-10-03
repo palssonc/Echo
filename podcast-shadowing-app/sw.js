@@ -1,5 +1,22 @@
-const CACHE='echo-static-v3';
-const FILES=['./','./index.html','./styles.css','./app.js','./manifest.webmanifest','./icon.svg'];
+const CACHE='echo-static-v4';
+const FILES=['./','./index.html','./styles.css','./downloads.js','./capture.js','./capture-worklet.js','./audio-events.js','./app.js','./manifest.webmanifest','./icon.svg'];
+const STATIC_PATHS=new Set(FILES.map(file=>new URL(file,self.registration.scope).pathname));
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
-self.addEventListener('fetch',e=>{const u=new URL(e.request.url);if(u.origin!==location.origin)return;e.respondWith(caches.match(e.request).then(cached=>cached||fetch(e.request).then(r=>{if(e.request.method==='GET'&&r.ok){const copy=r.clone();caches.open(CACHE).then(c=>c.put(e.request,copy))}return r}).catch(()=>caches.match('./index.html'))))});
+self.addEventListener('fetch',e=>{
+  if(e.request.method!=='GET')return;
+  const url=new URL(e.request.url);
+  if(url.origin!==location.origin)return;
+  e.respondWith(fetch(e.request).then(response=>{
+    if(response.ok&&STATIC_PATHS.has(url.pathname)){
+      const copy=response.clone();
+      caches.open(CACHE).then(cache=>cache.put(e.request,copy));
+    }
+    return response;
+  }).catch(async()=>{
+    const cached=await caches.match(e.request);
+    if(cached)return cached;
+    if(e.request.mode==='navigate')return caches.match('./index.html');
+    return Response.error();
+  }));
+});

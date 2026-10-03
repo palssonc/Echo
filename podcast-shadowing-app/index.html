@@ -44,6 +44,8 @@
     <section id="downloadsView" class="view">
       <div class="hero compact-hero"><div class="eyebrow">ON THIS DEVICE</div><h1>Your downloads.</h1><p>Episodes saved for offline listening stay on this device.</p></div>
       <div class="section-heading library-heading"><div><div class="eyebrow">OFFLINE LISTENING</div><h2>Downloaded episodes <span id="downloadCount" class="count">0</span></h2></div></div>
+      <p id="downloadStorage" class="form-note"></p>
+      <p class="form-note">Keep Echo open until a download finishes. Saved episodes remain here when you go offline.</p>
       <div id="downloadLibrary" class="download-library"></div>
       <div id="emptyDownloads" class="empty-state"><div class="empty-icon">↓</div><h3>No episodes downloaded</h3><p>Open a podcast and tap Download next to an episode to save it here.</p><button class="primary-button" data-nav="podcasts">Browse podcasts</button></div>
     </section>
@@ -55,6 +57,9 @@
   <dialog id="practiceDialog" class="practice-dialog"></dialog>
   <dialog id="feedDialog" class="feed-dialog"><form method="dialog" id="feedForm"><button class="dialog-close" value="cancel" aria-label="Close">×</button><div class="eyebrow">ADD A PODCAST</div><h2>Bring your own feed.</h2><p>Paste an RSS feed address to add a show to your shelf.</p><input id="feedUrl" type="url" placeholder="https://example.com/podcast.xml" required><div class="dialog-actions"><button class="secondary-button" value="cancel">Cancel</button><button id="feedSubmit" class="primary-button" value="default">Add podcast</button></div><div id="feedError" class="form-note error"></div></form></dialog>
   <audio id="audio" preload="metadata"></audio>
+  <script src="downloads.js"></script>
+  <script src="capture.js"></script>
+  <script src="audio-events.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
