@@ -1,6 +1,6 @@
 # Echo — Podcast Shadowing
 
-Echo is a static, installable web app for discovering podcast feeds and saving moments for language shadowing. Subscriptions, listening positions, clips, notes, favorites, microphone recordings, and downloaded episodes are stored in the browser's IndexedDB on this device. Downloaded episodes can play offline after the download completes.
+Echo is a static, installable web app for discovering podcast feeds and saving moments for language shadowing. Subscriptions, listening positions, clips, notes, favorites, microphone recordings, and downloaded episodes are stored in the browser's IndexedDB on this device. Open **Downloads** in the bottom navigation to find, play, or remove saved episodes. The player labels downloaded playback separately from streaming.
 
 ## Run locally
 
