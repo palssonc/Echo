@@ -1,6 +1,6 @@
 # Echo — Podcast Shadowing
 
-Echo is a static, installable web app for discovering podcast feeds and saving moments for language shadowing. Subscriptions, listening positions, clips, notes, favorites, microphone recordings, and downloaded episodes are stored in the browser's IndexedDB on this device. Open **Downloads** in the bottom navigation to find, play, or remove saved episodes. The player labels downloaded playback separately from streaming.
+Echo is a static, installable web app for discovering podcast feeds and saving moments for language shadowing. Subscriptions, listening positions, clips, notes, favorites, and microphone recordings are stored in this browser's IndexedDB. Episode downloads use the browser's private file storage when available, with IndexedDB as a fallback. Open **Downloads** in the bottom navigation to check progress, cancel a download, play a saved episode, or remove it. The player labels downloaded playback separately from streaming.
 
 ## Run locally
 
@@ -8,11 +8,11 @@ Open this folder in a static web server. For example, from this directory run `p
 
 ## Publish on GitHub Pages
 
-The repository-level workflow at `../.github/workflows/deploy-podcast-pages.yml` publishes this folder to GitHub Pages on pushes to `main` or `master`. Push this workspace to a GitHub repository, set the repository's Pages source to **GitHub Actions**, and push to the matching branch. GitHub Pages cannot be enabled from this workspace until a GitHub remote/repository is connected.
+The repository-level workflow at `../.github/workflows/deploy-podcast-pages.yml` publishes this folder to GitHub Pages on pushes to `main` or `master`. The live site is [Echo on GitHub Pages](https://palssonc.github.io/Echo/). The repository's Pages source is GitHub Actions.
 
 ## Browser limits
 
-Podcast audio is hosted by many independent publishers. The player attempts CORS-enabled playback so it can keep a short rolling audio buffer for one-tap clips. If a host blocks browser audio access, Echo falls back to normal playback and reports that clipping is unavailable for that episode. Downloads also require the podcast host to allow browser CORS requests; the app reports when a host blocks a download. Feed import tries the feed directly, then a public CORS relay; that relay is an external service. Installability, background audio, and microphone behavior vary by browser and device.
+Podcast audio is hosted by many independent publishers. The player attempts CORS-enabled playback so it can keep a short rolling audio buffer for one-tap clips. If a host blocks browser audio access, Echo falls back to normal playback and reports that clipping is unavailable for that episode. Downloads also require the podcast host to allow browser CORS requests; the app reports when a host blocks a download. Clips from an episode already saved in Downloads use the local file and can work even when the host blocks browser capture of its stream. Feed import tries the feed directly, then a public CORS relay; that relay is an external service. Installability, background audio, and microphone behavior vary by browser and device.
 
 ## Local data
 
