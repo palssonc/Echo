@@ -1,0 +1,8 @@
+/*
+!/.gitignore
+!/podcast-shadowing-app/
+!/.github/
+/.github/*
+!/.github/workflows/
+/.github/workflows/*
+!/.github/workflows/deploy-podcast-pages.yml

@@ -1,0 +1,11 @@
+{
+  "name": "Echo — Podcast Shadowing",
+  "short_name": "Echo",
+  "description": "A local-first podcast player for language shadowing practice.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f4ee",
+  "theme_color": "#f6f4ee",
+  "icons": [{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}
