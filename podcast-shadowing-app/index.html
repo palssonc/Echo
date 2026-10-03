@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f6f4ee">
+  <meta name="description" content="A local-first podcast player for language shadowing practice.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <title>Echo — podcast shadowing</title>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#podcasts" aria-label="Echo home"><span class="brand-mark">e</span><span>echo</span></a>
+    <div class="header-note">PODCASTS, WITH A PURPOSE</div>
+    <button id="installButton" class="install-button" hidden>Install app</button>
+  </header>
+  <main>
+    <section id="podcastsView" class="view active">
+      <div class="hero">
+        <div class="eyebrow">YOUR LISTENING DESK</div>
+        <h1>Find a voice<br>worth following.</h1>
+        <p>Bring your favorite podcasts into a quiet space to listen, save a phrase, and make it yours.</p>
+        <form id="searchForm" class="search-box"><span aria-hidden="true">⌕</span><input id="searchInput" placeholder="Search podcasts or paste an RSS feed" autocomplete="off"><button type="submit" aria-label="Search">Search</button></form>
+        <div id="searchStatus" class="form-note">Search the podcast directory, or paste a feed URL.</div>
+        <div class="topic-list" aria-label="Browse podcast topics"><span class="eyebrow">BROWSE BY TOPIC</span><button data-topic="language learning">Language</button><button data-topic="storytelling podcasts">Stories</button><button data-topic="daily news podcasts">News</button><button data-topic="science podcasts">Science</button><button data-topic="culture podcasts">Culture</button></div>
+      </div>
+      <div class="section-heading"><div><div class="eyebrow">YOUR SHELF</div><h2>Following <span id="followCount" class="count">0</span></h2></div><button id="addFeedButton" class="text-button">＋ Add feed URL</button></div>
+      <div id="shelf" class="podcast-grid"></div>
+      <div id="emptyShelf" class="empty-state"><div class="empty-icon">◎</div><h3>Your shelf is waiting</h3><p>Search for a show above or add its RSS feed to get started.</p></div>
+      <div id="resultsSection" hidden><div class="section-heading results-heading"><div><div class="eyebrow">THE DIRECTORY</div><h2 id="resultsTitle">Search results</h2></div></div><div id="searchResults" class="podcast-grid"></div></div>
+      <div id="episodesSection" class="episodes-panel" hidden></div>
+    </section>
+    <section id="playerView" class="view">
+      <div id="playerEmpty" class="empty-state player-empty"><div class="empty-icon">♫</div><h3>Nothing playing yet</h3><p>Choose an episode from a podcast on your shelf.</p><button class="primary-button" data-nav="podcasts">Browse podcasts</button></div>
+      <div id="playerContent" hidden></div>
+    </section>
+    <section id="shadowView" class="view">
+      <div class="hero compact-hero"><div class="eyebrow">THE PRACTICE ROOM</div><h1>Keep the<br>good lines.</h1><p>Small moments, saved from the voices you love.</p></div>
+      <div class="section-heading library-heading"><div><div class="eyebrow">YOUR CLIPS</div><h2>Practice library <span id="clipCount" class="count">0</span></h2></div><div class="filters"><select id="durationFilter" aria-label="Filter by clip length"><option value="all">All lengths</option><option value="10">10 seconds</option><option value="45">45 seconds</option></select><select id="sortFilter" aria-label="Sort clips"><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select></div></div>
+      <div id="clipLibrary" class="clip-grid"></div>
+      <div id="emptyLibrary" class="empty-state"><div class="empty-icon">⌁</div><h3>Save a moment worth repeating</h3><p>While an episode plays, tap Clip 10s or Clip 45s. The buttons capture audio just before you tap.</p><button class="primary-button" data-nav="podcasts">Find a podcast</button></div>
+    </section>
+  </main>
+  <nav class="bottom-nav" aria-label="Main navigation"><button class="nav-item active" data-nav="podcasts"><span>⌂</span><small>Podcasts</small></button><button class="nav-item" data-nav="player"><span>♫</span><small>Now playing</small><i id="playingDot" class="playing-dot" hidden></i></button><button class="nav-item" data-nav="shadow"><span>⌁</span><small>Shadowing</small></button></nav>
+  <div id="miniPlayer" class="mini-player" hidden></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <dialog id="practiceDialog" class="practice-dialog"></dialog>
+  <dialog id="feedDialog" class="feed-dialog"><form method="dialog" id="feedForm"><button class="dialog-close" value="cancel" aria-label="Close">×</button><div class="eyebrow">ADD A PODCAST</div><h2>Bring your own feed.</h2><p>Paste an RSS feed address to add a show to your shelf.</p><input id="feedUrl" type="url" placeholder="https://example.com/podcast.xml" required><div class="dialog-actions"><button class="secondary-button" value="cancel">Cancel</button><button id="feedSubmit" class="primary-button" value="default">Add podcast</button></div><div id="feedError" class="form-note error"></div></form></dialog>
+  <audio id="audio" preload="metadata"></audio>
+  <script src="app.js"></script>
+</body>
+</html>
+
