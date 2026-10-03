@@ -41,8 +41,14 @@
       <div id="clipLibrary" class="clip-grid"></div>
       <div id="emptyLibrary" class="empty-state"><div class="empty-icon">⌁</div><h3>Save a moment worth repeating</h3><p>While an episode plays, tap Clip 10s or Clip 45s. The buttons capture audio just before you tap.</p><button class="primary-button" data-nav="podcasts">Find a podcast</button></div>
     </section>
+    <section id="downloadsView" class="view">
+      <div class="hero compact-hero"><div class="eyebrow">ON THIS DEVICE</div><h1>Your downloads.</h1><p>Episodes saved for offline listening stay on this device.</p></div>
+      <div class="section-heading library-heading"><div><div class="eyebrow">OFFLINE LISTENING</div><h2>Downloaded episodes <span id="downloadCount" class="count">0</span></h2></div></div>
+      <div id="downloadLibrary" class="download-library"></div>
+      <div id="emptyDownloads" class="empty-state"><div class="empty-icon">↓</div><h3>No episodes downloaded</h3><p>Open a podcast and tap Download next to an episode to save it here.</p><button class="primary-button" data-nav="podcasts">Browse podcasts</button></div>
+    </section>
   </main>
-  <nav class="bottom-nav" aria-label="Main navigation"><button class="nav-item active" data-nav="podcasts"><span>⌂</span><small>Podcasts</small></button><button class="nav-item" data-nav="player"><span>♫</span><small>Now playing</small><i id="playingDot" class="playing-dot" hidden></i></button><button class="nav-item" data-nav="shadow"><span>⌁</span><small>Shadowing</small></button></nav>
+  <nav class="bottom-nav" aria-label="Main navigation"><button class="nav-item active" data-nav="podcasts"><span>⌂</span><small>Podcasts</small></button><button class="nav-item" data-nav="player"><span>♫</span><small>Now playing</small><i id="playingDot" class="playing-dot" hidden></i></button><button class="nav-item" data-nav="shadow"><span>⌁</span><small>Shadowing</small></button><button class="nav-item" data-nav="downloads"><span>↓</span><small>Downloads <b id="downloadNavCount">0</b></small></button></nav>
   <div id="miniPlayer" class="mini-player" hidden></div>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <dialog id="episodesDialog" class="episodes-dialog"><button id="closeEpisodes" class="dialog-close" aria-label="Close podcast">×</button><section id="episodesSection" class="episodes-panel"></section></dialog>
