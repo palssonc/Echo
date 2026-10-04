@@ -14,17 +14,17 @@ const EchoCapture = (() => {
       setStatus('This host blocks browser clipping. If you already saved this episode, play it from Downloads.', true);
     } else if (state.captureMode === 'direct') {
       setStatus('Audio capture is unavailable in this browser for this playback.', true);
+    } else if (state.activeClip) {
+      const elapsed = Math.min(45, Math.max(0, audio.currentTime - state.activeClip.start));
+      setStatus((audio.paused ? 'Clip paused' : 'Recording clip') + ' · ' + fmt(elapsed) + ' / 0:45');
     } else if (audio.paused) {
-      setStatus('Start playback to prepare clipping.');
+      setStatus('Start playback, then tap Start clip at the phrase you want.');
     } else if (state.audioCtx && state.audioCtx.state !== 'running') {
       setStatus('Tap play to activate audio capture on this device.');
-    } else if (state.ringSamples < state.audioCtx.sampleRate) {
-      setStatus('Preparing the clip buffer…');
+    } else if (!state.audioCtx || !state.processor) {
+      setStatus('Preparing clip capture…');
     } else {
-      const seconds = Math.floor(state.ringSamples / state.audioCtx.sampleRate * audio.playbackRate);
-      if (seconds < 10) setStatus(seconds + 's captured · keep listening for a 10s clip');
-      else if (seconds < 45) setStatus('10s clip ready · ' + seconds + 's captured');
-      else setStatus('10s and 45s clips ready');
+      setStatus('Ready to mark a clip · 45 seconds maximum');
     }
   }
 
@@ -36,6 +36,7 @@ const EchoCapture = (() => {
     }
     state.ringAt = (state.ringAt + samples.length) % state.ring.length;
     state.ringSamples = Math.min(state.ring.length, state.ringSamples + samples.length);
+    state.totalSamples += samples.length;
     if (Date.now() - lastStatusAt > 1000) {
       lastStatusAt = Date.now();
       status();

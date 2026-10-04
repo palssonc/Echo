@@ -1,4 +1,4 @@
-const CACHE='echo-static-v4';
+const CACHE='echo-static-v5';
 const FILES=['./','./index.html','./styles.css','./downloads.js','./capture.js','./capture-worklet.js','./audio-events.js','./app.js','./manifest.webmanifest','./icon.svg'];
 const STATIC_PATHS=new Set(FILES.map(file=>new URL(file,self.registration.scope).pathname));
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES)).then(()=>self.skipWaiting())));

@@ -2,6 +2,8 @@
 
 Echo is a static, installable web app for discovering podcast feeds and saving moments for language shadowing. Subscriptions, listening positions, clips, notes, favorites, and microphone recordings are stored in this browser's IndexedDB. Episode downloads use the browser's private file storage when available, with IndexedDB as a fallback. Open **Downloads** in the bottom navigation to check progress, cancel a download, play a saved episode, or remove it. The player labels downloaded playback separately from streaming.
 
+While playing an episode, jump back 5 seconds to prepare for a phrase. Tap **Start clip** at the first word, then **End clip** at the last. Clips save with their exact selected length and stop automatically at 45 seconds. Seeking or changing playback speed while marking a clip cancels it.
+
 ## Run locally
 
 Open this folder in a static web server. For example, from this directory run `python -m http.server 8000`, then open `http://localhost:8000`. The app needs HTTPS or localhost for PWA installation and microphone recording. Podcast discovery, RSS feeds, and audio playback need an internet connection.

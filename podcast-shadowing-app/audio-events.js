@@ -25,6 +25,7 @@ const EchoAudio = (() => {
       if (player.querySelector('.current-time')) player.querySelector('.current-time').textContent = fmt(audio.currentTime);
       if (player.querySelector('.total-time')) player.querySelector('.total-time').textContent = fmt(audio.duration);
       if ($('#miniPlayer .mini-time')) $('#miniPlayer .mini-time').textContent = fmt(audio.currentTime);
+      if (state.activeClip && audio.currentTime - state.activeClip.start >= 45) finishClip(true);
       if (!state.current) return;
       clearTimeout(savePositionTimer);
       savePositionTimer = setTimeout(() => put('positions', {
@@ -35,10 +36,16 @@ const EchoAudio = (() => {
       if (element === audio) syncPlayer();
     });
     element.addEventListener('seeking', () => {
-      if (element === audio) EchoCapture.clearBuffer();
+      if (element === audio) {
+        cancelClip(true, 'Clip cancelled after jumping in the episode.');
+        EchoCapture.clearBuffer();
+      }
     });
     element.addEventListener('ended', () => {
-      if (element === audio) updatePlayIcons();
+      if (element === audio) {
+        if (state.activeClip) finishClip();
+        updatePlayIcons();
+      }
     });
     element.addEventListener('error', () => {
       if (element === audio) handleError();
@@ -47,6 +54,7 @@ const EchoAudio = (() => {
 
   function handleError() {
     if (!state.current || state.corsFallback) return;
+    cancelClip(false);
     if (state.playbackSource === 'download') {
       toast('This saved episode could not be played. Remove it and download it again.');
       EchoCapture.status();
